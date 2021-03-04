@@ -21,6 +21,10 @@ export class AppComponent {
       nombre: 'Luis Torrega',
       estado: 'Suspenso',
     },
+    {
+      nombre: 'Rebecca Thomson',
+      estado: 'Retirado',
+    },
   ];
 
   mostrar: boolean = true;

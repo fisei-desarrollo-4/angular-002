@@ -1,11 +1,11 @@
 <div class="container mt-4">
   <div class="row">
     <h3>Listado de estudiantes</h3>
-    <button class="btn btn-primary ml-auto" (click)="ejecutar()">Aceptar</button>
+    <!-- <button class="btn btn-primary ml-auto" (click)="ejecutar()">Aceptar</button> -->
 
   </div>
   <br>
-  <table class="table" *ngIf="mostrar">
+  <table class="table" *ngIf="listaEstudiante.length > 0">
     <thead>
       <th>Nro.</th>
       <th>Nombre</th>
@@ -13,12 +13,37 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let estudiante of listaEstudiante; let i = index">
+      <tr *ngFor="let estudiante of listaEstudiante; let i = index" [ngSwitch]="estudiante.estado">
+
         <td> {{ i + 1 }} </td>
         <td> {{ estudiante.nombre }} </td>
-        <td> {{ estudiante.estado }}</td>
+
+        <!-- <td [ngStyle]="{'color': estudiante.estado === 'Suspenso' ? 'red' : 'black'}"> {{ estudiante.estado }}</td> -->
+
+        <!-- <td>
+          <span [ngClass]="estudiante.estado === 'Suspenso' ? 'badge bg-success' : 'badge bg-secondary' "> {{
+            estudiante.estado }} </span>
+        </td> -->
+
+        <td>
+          <span *ngSwitchCase="'Aprobado'" class="badge bg-success"> {{
+            estudiante.estado }}
+          </span>
+
+          <span *ngSwitchCase="'Suspenso'" class="badge bg-secondary"> {{
+            estudiante.estado }}
+          </span>
+
+          <span *ngSwitchCase="'Retirado'" class="badge bg-danger"> {{
+            estudiante.estado }}
+          </span>
+        </td>
+
       </tr>
     </tbody>
 
+
   </table>
+
+  <h3 *ngIf="listaEstudiante.length == 0">No existen datos para mostrar</h3>
 </div>
